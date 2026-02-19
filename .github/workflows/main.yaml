@@ -1,9 +1,9 @@
 name: Push changes to Pipeline 2
 
-on:   
+on:
   push:
-      branches:
-        - main
+    branches:
+      - main
 
 jobs:
   commit-app-info:
@@ -11,27 +11,26 @@ jobs:
     permissions:
       contents: write
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-      with:
-        ref: dev
-        persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
-        fetch-depth: 0
-    - name: Update pnc-doc-generation-papi
-      run: |
-        # Update properties file
-        cat > "batch-car-apps-release/pnc-doc-generation-papi.properties" << EOF
-        artifactID=1
-        version=3
-        groupID=4
-        EOF
-    - name: Push Change to CD Branch
-      id: push_to_ci
-      uses: actions-js/push@master
-      with:
-        github_token: ${{ secrets.GH_TOKEN }}
-        message: "Update pnc-doc-generation-papi.properties"
-        branch: dev
-      env:
-        REPO_TOKEN: ${{ secrets.GH_TOKEN }}
-  
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: dev
+          persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal token
+          fetch-depth: 0
+      - name: Update pnc-doc-generation-papi
+        run: |
+          # Update properties file
+          cat > "batch-car-apps-release/pnc-doc-generation-papi.properties" << EOF
+          artifactID=1
+          version=3
+          groupID=4
+          EOF
+      - name: Push Change to CD Branch
+        id: push_to_ci
+        uses: actions-js/push@master
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          message: "Update pnc-doc-generation-papi.properties"
+          branch: dev
+        env:
+          REPO_TOKEN: ${{ secrets.GH_TOKEN }}
