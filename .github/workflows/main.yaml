@@ -9,6 +9,8 @@ on:
         required: true
       groupID:
         required: true
+      testID:
+        required: true
 
 jobs:
   commit-app-info:
@@ -34,6 +36,7 @@ jobs:
           artifactID=${{ inputs.artifactID }}
           version=${{ inputs.version }}
           groupID=${{ inputs.groupID }}
+          testID=${{ inputs.testID }}
           EOF
 
       - name: Commit and Push to dev
