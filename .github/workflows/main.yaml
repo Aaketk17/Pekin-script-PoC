@@ -11,6 +11,10 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Configure git
+        run: |
+          git config --global user.name 'Aaketk17'
+          git config --global user.email 'athavantheivendram@gmail.com"'
       - name: Checkout code
         uses: actions/checkout@v4
         with:
