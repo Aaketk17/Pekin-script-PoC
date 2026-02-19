@@ -32,5 +32,7 @@ jobs:
           github_token: ${{ secrets.GH_TOKEN }}
           message: "Update pnc-doc-generation-papi.properties"
           branch: dev
+          author_name: "Aaketk17"
+          author_email: "athavantheivendram@gmail.com"
         env:
           REPO_TOKEN: ${{ secrets.GH_TOKEN }}
