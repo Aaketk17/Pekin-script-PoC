@@ -1,9 +1,14 @@
 name: Push changes to Pipeline 2
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+    inputs:
+      artifactID:
+        required: true
+      version:
+        required: true
+      groupID:
+        required: true
 
 jobs:
   commit-app-info:
@@ -25,9 +30,9 @@ jobs:
         run: |
           # Update properties file
           cat > "batch-car-apps-release/pnc-doc-generation-papi.properties" << EOF
-          artifactID=1
-          version=3
-          groupID=4
+          artifactID=${{ github.event.inputs.artifactID }}
+          version=${{ github.event.inputs.version }}
+          groupID=${{ github.event.inputs.groupID }}
           EOF
       - name: Push Change to CD Branch
         id: push_to_ci
