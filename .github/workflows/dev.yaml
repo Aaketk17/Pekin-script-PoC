@@ -1,4 +1,4 @@
-name: Push changes to Pipeline 2
+name: Pipeline 2
 
 on:
   push:
@@ -6,10 +6,8 @@ on:
       - dev
 
 jobs:
-  commit-app-info:
+  DevChange:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
       - name: Checkout code at triggering commit
         uses: actions/checkout@v4
