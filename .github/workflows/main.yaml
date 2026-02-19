@@ -29,9 +29,9 @@ jobs:
       id: push_to_ci
       uses: actions-js/push@master
       with:
-        github_token: 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
+        github_token: ${{ secrets.GH_TOKEN }}
         message: "Update pnc-doc-generation-papi.properties"
         branch: dev
       env:
-        REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+        REPO_TOKEN: ${{ secrets.GH_TOKEN }}
   
