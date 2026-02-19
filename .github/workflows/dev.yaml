@@ -12,5 +12,17 @@ jobs:
     steps:
       - name: Checkout code at triggering commit
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 2
       - name: Detect and read changed .properties file
-        run: echo "success"
+        run: bash bash/script.sh
+
+      - name: Use extracted values
+        run: |
+          echo "Changed File : $CHANGED_PROPERTIES_FILE"
+          echo "artifactID   : $ARTIFACT_ID"
+          echo "version      : $VERSION"
+          echo "groupID      : $GROUP_ID"
+
+
