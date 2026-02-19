@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - dev
-
+    paths:
+      - batch-car-apps-release/**
 jobs:
   DevChange:
     runs-on: ubuntu-latest
@@ -13,4 +14,3 @@ jobs:
         uses: actions/checkout@v4
       - name: Detect and read changed .properties file
         run: echo "success"
-
