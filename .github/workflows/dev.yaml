@@ -28,9 +28,10 @@ jobs:
           git clone -b ${BRANCH_NAME} https://github.com:Aaketk17/test-script-PoC.git
           cd test-script-PoC/batch-car-apps-release
           ls
-          
-          git tag "${RELEASE_FLOW}-${GITHUB_SHA}"
+          VALUE=$(grep 'lastdeployAPI' batch-car-apps-release/lastapi.yaml | awk -F': ' '{print $2}')
+          git tag -a "${RELEASE_FLOW}-${GITHUB_SHA}" -m "lastAPI=$VALUE"
           git push origin "${RELEASE_FLOW}-${GITHUB_SHA}"
+
       - name: Detect and read changed .properties file
         run: bash bash/script.sh
 
@@ -40,5 +41,29 @@ jobs:
           echo "artifactID   : $ARTIFACT_ID"
           echo "version      : $VERSION"
           echo "groupID      : $GROUP_ID"
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: feature
+          token: ${{ secrets.REPO_TOKEN }}
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config --global user.name 'Aaketk17'
+          git config --global user.email 'athavantheivendram@gmail.com'
+
+      - name: Update pnc-doc-generation-papi
+        run: |
+          API=$(git for-each-ref refs/tags/v2.0 --format='%(contents)' | grep '^lastAPI=' | cut -d'=' -f2 )
+          cat > "test-folder/lastapi.properties" << EOF
+          $API
+          EOF
+      - name: Commit and Push to feature
+        run: |
+          git add test-folder/lastapi.properties
+          git diff --staged --quiet || git commit -m "Update test-folder/lastapi.properties"
+          git push origin feature
 
 
