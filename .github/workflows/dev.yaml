@@ -50,6 +50,8 @@ jobs:
           REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
         run: |
+          PUSHER="${{ github.event.pusher.name }}"
+          echo $PUSHER
           git clone -b ${BRANCH_NAME} https://${REPO_TOKEN}@github.com/Aaketk17/test-script-PoC.git
           cd test-script-PoC/batch-car-apps-release
           ls
