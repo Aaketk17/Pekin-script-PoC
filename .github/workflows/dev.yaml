@@ -26,6 +26,7 @@ jobs:
           cd test-script-PoC/batch-car-apps-release
           ls
           pwd
+          echo ${RELEASE_FLOW}-${GITHUB_SHA}
           VALUE=$(grep 'lastdeployAPI' lastapi.yaml | awk -F': ' '{print $2}')
           git tag -a "${RELEASE_FLOW}-${GITHUB_SHA}" -m "lastAPI=$VALUE"
           git push origin "${RELEASE_FLOW}-${GITHUB_SHA}"
