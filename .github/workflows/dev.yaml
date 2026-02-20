@@ -26,10 +26,10 @@ jobs:
           cd test-script-PoC/batch-car-apps-release
           ls
           pwd
-          echo ${RELEASE_FLOW}-${GITHUB_SHA}
+          echo ${BRANCH_NAME}-${GITHUB_SHA}
           VALUE=$(grep 'lastdeployAPI' lastapi.yaml | awk -F': ' '{print $2}')
-          git tag -a "${RELEASE_FLOW}-${GITHUB_SHA}" -m "lastAPI=$VALUE"
-          git push origin "${RELEASE_FLOW}-${GITHUB_SHA}"
+          git tag -a "${BRANCH_NAME}-${GITHUB_SHA}" -m "lastAPI=$VALUE"
+          git push origin "${BRANCH_NAME}-${GITHUB_SHA}"
 
       - name: Detect and read changed .properties file
         run: bash bash/script.sh
