@@ -20,6 +20,8 @@ jobs:
         id: check
         run: |
           if git diff --name-only HEAD^ HEAD | grep -q '^batch-car-apps-release/'; then
+            VALUE=$(git diff --name-only HEAD^ HEAD | grep -q '^batch-car-apps-release/')
+            echo $VALUE
             echo "car_apps_changed=true" >> $GITHUB_OUTPUT
             echo "Yes"
           else
@@ -80,7 +82,7 @@ jobs:
           cat > "test-folder/lastapi.properties" << EOF
           $API
           EOF
-      
+
       - name: Commit and Push to feature
         run: |
           git add test-folder/lastapi.properties
