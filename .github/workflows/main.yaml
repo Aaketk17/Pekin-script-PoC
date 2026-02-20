@@ -39,7 +39,7 @@ jobs:
           testID=${{ inputs.testID }}
           EOF
           cat > "batch-car-apps-release/lastapi.yaml" << EOF
-          lastdeployAPI=lastdeployAPI-${{ inputs.artifactID }}
+          lastdeployAPI:lastdeployAPI-${{ inputs.artifactID }}
           EOF
       - name: Commit and Push to dev
         run: |
