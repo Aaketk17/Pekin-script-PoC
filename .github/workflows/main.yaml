@@ -43,7 +43,7 @@ jobs:
           lastdeployAPI:lastdeployAPI-${{ inputs.artifactID }}
           EOF
 
-          ls
+          ls batch-car-apps-release
       - name: Commit and Push to dev
         run: |
           git add batch-car-apps-release/pnc-doc-generation-papi.properties
