@@ -16,6 +16,15 @@ jobs:
         with:
           fetch-depth: 2
 
+      - name: Check commit source
+        id: check_source
+        run: |
+          # github.event.pusher.name will be the GitHub Actions bot if pushed by a pipeline
+          PUSHER="${{ github.event.pusher.name }}"
+          COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
+          echo "Pusher          : $PUSHER"
+          echo "Commit Message  : $COMMIT_MESSAGE"
+
       - name: Check if realtime-car-apps-release changed
         id: check
         run: |
