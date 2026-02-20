@@ -15,6 +15,22 @@ jobs:
         with:
           ref: ${{ github.sha }}
           fetch-depth: 2
+      - name: Create Tag
+        id: create_tag
+        env:
+          GITHUB_SHA: ${{ github.sha }}
+          REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+          BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
+        run: |
+          git config --global url."https://x-token-auth:${REPO_TOKEN}@github.com:Aaketk17/test-script-PoC.git".InsteadOf https://github.com:Aaketk17/test-script-PoC.git
+          git config --global user.name "Aaketk17"
+          git config --global user.email "athavantheivendram@gmail.com"
+          git clone -b ${BRANCH_NAME} https://github.com:Aaketk17/test-script-PoC.git
+          cd test-script-PoC/batch-car-apps-release
+          ls
+          
+          git tag "${RELEASE_FLOW}-${GITHUB_SHA}"
+          git push origin "${RELEASE_FLOW}-${GITHUB_SHA}"
       - name: Detect and read changed .properties file
         run: bash bash/script.sh
 
