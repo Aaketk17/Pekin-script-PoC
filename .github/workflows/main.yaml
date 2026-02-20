@@ -46,6 +46,6 @@ jobs:
           ls batch-car-apps-release
       - name: Commit and Push to dev
         run: |
-          git add batch-car-apps-release/pnc-doc-generation-papi.properties
+          git add batch-car-apps-release/pnc-doc-generation-papi.properties batch-car-apps-release/lastapi.yaml
           git diff --staged --quiet || git commit -m "Update pnc-doc-generation-papi.properties"
           git push origin dev
