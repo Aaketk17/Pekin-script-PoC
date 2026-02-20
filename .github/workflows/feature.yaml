@@ -18,5 +18,3 @@ jobs:
       - name: Use extracted values
         run: |
           echo "All working good"
-
-
