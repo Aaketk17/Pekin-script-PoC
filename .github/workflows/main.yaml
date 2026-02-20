@@ -38,7 +38,9 @@ jobs:
           groupID=${{ inputs.groupID }}
           testID=${{ inputs.testID }}
           EOF
-
+          cat > "batch-car-apps-release/lastapi.yaml" << EOF
+          lastdeployAPI=lastdeployAPI-${{ inputs.artifactID }}
+          EOF
       - name: Commit and Push to dev
         run: |
           git add batch-car-apps-release/pnc-doc-generation-papi.properties
