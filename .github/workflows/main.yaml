@@ -1,4 +1,4 @@
-name: Push changes to Pipeline 2
+name: Pipeline 1
 
 on:
   workflow_dispatch:
