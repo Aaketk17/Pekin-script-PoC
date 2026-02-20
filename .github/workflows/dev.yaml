@@ -25,7 +25,7 @@ jobs:
           git clone -b ${BRANCH_NAME} https://${REPO_TOKEN}@github.com/Aaketk17/test-script-PoC.git
           cd test-script-PoC/batch-car-apps-release
           ls
-          VALUE=$(grep 'lastdeployAPI' batch-car-apps-release/lastapi.yaml | awk -F': ' '{print $2}')
+          VALUE=$(grep 'lastdeployAPI' test-script-PoC/batch-car-apps-release/lastapi.yaml | awk -F': ' '{print $2}')
           git tag -a "${RELEASE_FLOW}-${GITHUB_SHA}" -m "lastAPI=$VALUE"
           git push origin "${RELEASE_FLOW}-${GITHUB_SHA}"
 
@@ -62,5 +62,3 @@ jobs:
           git add test-folder/lastapi.properties
           git diff --staged --quiet || git commit -m "Update test-folder/lastapi.properties"
           git push origin feature
-
-
