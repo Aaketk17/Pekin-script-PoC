@@ -22,7 +22,7 @@ jobs:
           REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
           BRANCH_NAME: ${{ github.head_ref || github.ref_name }}
         run: |
-          git clone -b ${BRANCH_NAME} https://${REPO_TOKEN}@github.com:Aaketk17/test-script-PoC.git
+          git clone -b ${BRANCH_NAME} https://${REPO_TOKEN}@github.com/Aaketk17/test-script-PoC.git
           cd test-script-PoC/batch-car-apps-release
           ls
           VALUE=$(grep 'lastdeployAPI' batch-car-apps-release/lastapi.yaml | awk -F': ' '{print $2}')
